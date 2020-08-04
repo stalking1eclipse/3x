@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Shield
   - Ground
+  - climbable
   layers:
   - Default
   - TransparentFX

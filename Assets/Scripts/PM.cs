@@ -10,6 +10,7 @@ public class PM : MonoBehaviour
     CapsuleCollider capsuleCollider;
     BoxCollider boxCollider;
     Rigidbody rb;
+    Climb climb;
 
     bool onGround = true;
     int SpeedUp = 0;
@@ -24,6 +25,7 @@ public class PM : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
+        climb = GameObject.FindGameObjectWithTag("climbable").GetComponent<Climb>();
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class PM : MonoBehaviour
 
         movePlayer();
 
-        if (vertical != 0)
+        if (vertical != 0 && !climb.canClimb)
         {
             lookAtCam();
         }
@@ -46,16 +48,12 @@ public class PM : MonoBehaviour
         {
             speed = 2;
         }
-        if (onGround == false)
-        {
-            transform.Translate(Vector3.forward * vertical * speed * Time.deltaTime);
-            transform.Translate(Vector3.right * horizontal * speed * Time.deltaTime);
-        }
+      
         
         anim.SetInteger("SpeedUp", SpeedUp);
         anim.SetFloat("Speed", vertical);
-        anim.SetBool("OnGround", onGround);
-        Debug.Log(onGround);
+        //anim.SetBool("OnGround", onGround);
+        //Debug.Log(onGround);
     }
 
     void movePlayer()
@@ -84,11 +82,11 @@ public class PM : MonoBehaviour
             StartCoroutine("getUp");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)&&onGround)
-        {
-            onGround = false;
-            rb.AddForce(Vector3.up*7,ForceMode.Impulse);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space)&&onGround)
+        //{
+        //    onGround = false;
+        //    rb.AddForce(Vector3.up*7,ForceMode.Impulse);
+        //}
         
         
     }
@@ -100,6 +98,7 @@ public class PM : MonoBehaviour
         }
     }
 
+    //camera look at player direction
     void lookAtCam()
     {
         Camera cam = Camera.main;
@@ -121,7 +120,7 @@ public class PM : MonoBehaviour
     }
 
     
-
+    //reactivates default collider after a slide
     IEnumerator getUp()
     {
         yield return new WaitForSeconds(.8f);
@@ -129,4 +128,5 @@ public class PM : MonoBehaviour
         capsuleCollider.enabled = true;
         boxCollider.enabled = false;
     }
+
 }
