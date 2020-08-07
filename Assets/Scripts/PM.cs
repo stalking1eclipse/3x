@@ -9,10 +9,8 @@ public class PM : MonoBehaviour
     float horizontal;
     CapsuleCollider capsuleCollider;
     BoxCollider boxCollider;
-    Rigidbody rb;
-    Climb climb;
 
-    bool onGround = true;
+
     int SpeedUp = 0;
     int speed = 2;
 
@@ -24,8 +22,6 @@ public class PM : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         capsuleCollider = GetComponent<CapsuleCollider>();
         boxCollider = GetComponent<BoxCollider>();
-        rb = GetComponent<Rigidbody>();
-        climb = GameObject.FindGameObjectWithTag("climbable").GetComponent<Climb>();
     }
 
     // Update is called once per frame
@@ -36,7 +32,7 @@ public class PM : MonoBehaviour
 
         movePlayer();
 
-        if (vertical != 0 && !climb.canClimb)
+        if (vertical != 0 )
         {
             lookAtCam();
         }
@@ -52,8 +48,6 @@ public class PM : MonoBehaviour
         
         anim.SetInteger("SpeedUp", SpeedUp);
         anim.SetFloat("Speed", vertical);
-        //anim.SetBool("OnGround", onGround);
-        //Debug.Log(onGround);
     }
 
     void movePlayer()
@@ -81,21 +75,8 @@ public class PM : MonoBehaviour
 
             StartCoroutine("getUp");
         }
-
-        //if (Input.GetKeyDown(KeyCode.Space)&&onGround)
-        //{
-        //    onGround = false;
-        //    rb.AddForce(Vector3.up*7,ForceMode.Impulse);
-        //}
         
         
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Ground"))
-        {
-            onGround = true;
-        }
     }
 
     //camera look at player direction
