@@ -66,6 +66,7 @@
     <Compile Include="Assets\OutlineToolkit\Script\Demonstration_NoclipController.cs" />
     <Compile Include="Assets\OutlineToolkit\Script\EdgeDetect.cs" />
     <Compile Include="Assets\OutlineToolkit\Script\MeshProcessor.cs" />
+    <Compile Include="Assets\Scripts\Doors.cs" />
     <Compile Include="Assets\Scripts\OpenDoor.cs" />
     <Compile Include="Assets\Scripts\PM.cs" />
     <Compile Include="Assets\Scripts\PlayerActions.cs" />

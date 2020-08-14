@@ -19,15 +19,24 @@ public class OpenDoor : MonoBehaviour
     }
 
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Player"))
         {
             Debug.Log("Open door");
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                animator.Play("OpenDoor");
-            }
+                animator.Play("door");
+        }
+       
+    }
+
+    
+	
+	private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.CompareTag("Player"))
+        {
+            Debug.Log("Open door");
+                animator.Play("closeDoor");
         }
        
     }

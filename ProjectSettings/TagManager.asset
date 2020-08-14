@@ -7,6 +7,7 @@ TagManager:
   - Shield
   - Ground
   - climbable
+  - Door
   layers:
   - Default
   - TransparentFX
